@@ -1,0 +1,11 @@
+.vscode/
+# C64 related files
+*.c64
+*.d64
+# comiled / object / debug files
+*.map
+*.dbg
+*.lbl
+*.o
+*.d
+*.tab
