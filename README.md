@@ -8,5 +8,8 @@ Original ASM project from https://github.com/pizza666/HOC/
 
 Needs cc65 V2.19 - https://cc65.github.io/
 
-Compile with:
-make all 
+1. Compile with:
+make all
+
+2. Create diskimage with all data with:
+make diskimage

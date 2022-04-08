@@ -15,7 +15,14 @@ TARGETS :=
 # Default: name of the current dir with target name appended
 PROGRAM := hoc
 
+# lets keep it name without the extension
+PROGRAM_NO_EXT := PROGRAM
+
+# diskimage
+DISKIMAGE := $(PROGRAM).d64
+
 # Add your data files here which get attached to the d64 file
+# implement the extensions for diskimage inclustion here
 
 # Path(s) to additional libraries required for linking the program
 # Use only if you don't want to place copies of the libraries in SRCDIR
@@ -49,7 +56,7 @@ OBJDIR :=
 
 # Command used to run the emulator.
 # Default: depending on target platform. For default (c64) target: x64 -kernal kernal -VICIIdsize -autoload
-EMUCMD := x64sc -initbreak 2112 -autostart
+EMUCMD := x64sc -default +sound +remotemonitor
 
 # Optional commands used before starting the emulation process, and after finishing it.
 # Default: none
@@ -312,7 +319,7 @@ $(PROGRAM): $(CONFIG) $(OBJECTS) $(LIBS)
 	cl65 -t $(CC65TARGET) $(LDFLAGS) -o $@ $(patsubst %.cfg,-C %.cfg,$^)
 
 
-test: $(PROGRAM)
+test: $(DISKIMAGE)
 	$(PREEMUCMD)
 	$(EMUCMD) $<
 	$(POSTEMUCMD)
@@ -323,6 +330,7 @@ clean:
 	$(call RMFILES,$(TABS))
 	$(call RMFILES,$(REMOVES))
 	$(call RMFILES,$(PROGRAM))
+	$(call RMFILES,$(DISKIMAGE))
 
 else # $(words $(TARGETLIST)),1
 
@@ -333,8 +341,13 @@ endif # $(words $(TARGETLIST)),1
 
 # create the d64, format it and attach the program
 
-#	c1541 -format diskname,id d64 $(PROGRAM).d64 -attach $(PROGRAM).d64 -write $(PROGRAM).c64 $(PROGRAM)
+diskimage:
+	c1541 -format diskname,id d64 $(DISKIMAGE) -attach $(DISKIMAGE) -write $(PROGRAM) $(PROGRAM)
+	c1541 -attach $(DISKIMAGE) -write ui.bin ui
+	c1541 -attach $(DISKIMAGE) -write wa.chr wa
 # c1541 -format diskname,id d64 $(PROGRAM).d64 -attach $(PROGRAM).d64 -write $(PROGRAM).c64 $(PROGRAM)
+# replace this with foreach on specific file types, maybe?
+
 
 OBJDIRLIST := $(wildcard $(OBJDIR)/*)
 

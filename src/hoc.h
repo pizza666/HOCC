@@ -68,7 +68,7 @@ int drawUi()
 {
 
     // load ui charmap
-    openFile("ui.bin",2);
+    openFile("ui",2);
     readFile(&buffer);
     closeFile(2);
     memcpy(SCREENRAM, &buffer, SCREENSIZE);        // chars 
@@ -88,7 +88,7 @@ int loadCharset(const char *filename)
 /// initilize ui and game screen
 int initScreen()
 {
-    loadCharset("wa.chr");
+    loadCharset("wa");
 
     // set colors
     VIC.bordercolor = COLOR_BLACK;
