@@ -2,6 +2,8 @@
 ### Generic Makefile for cc65 projects - full version with abstract options ###
 ### V1.3.0(w) 2010 - 2013 Oliver Schmidt & Patryk "Silver Dream !" Łogiewa  ###
 ###############################################################################
+### Original file from:
+### https://github.com/empathicqubit/vscode-cc65-debugger/blob/master/src/__tests__/c-project-template/Makefile
 
 ###############################################################################
 ### In order to override defaults - values can be assigned to the variables ###
@@ -16,7 +18,7 @@ TARGETS :=
 PROGRAM := hoc
 
 # lets keep it name without the extension
-PROGRAM_NO_EXT := PROGRAM
+PROGRAM_NO_EXT := $(PROGRAM)
 
 # diskimage
 DISKIMAGE := $(PROGRAM).d64
@@ -257,9 +259,9 @@ ifneq ($(word 2,$(CONFIG)),)
 endif
 
 .SUFFIXES:
-.PHONY: all test clean zap love
+.PHONY: all diskimage test clean zap love
 
-all: $(PROGRAM)
+all: $(PROGRAM) diskimage
 
 -include $(DEPENDS)
 -include $(STATEFILE)
@@ -318,6 +320,12 @@ vpath %.a65 $(SRCDIR)/$(TARGETLIST) $(SRCDIR)
 $(PROGRAM): $(CONFIG) $(OBJECTS) $(LIBS)
 	cl65 -t $(CC65TARGET) $(LDFLAGS) -o $@ $(patsubst %.cfg,-C %.cfg,$^)
 
+# create the d64, format it and attach the program
+diskimage:
+	c1541 -format diskname,id d64 $(DISKIMAGE) -attach $(DISKIMAGE) -write $(PROGRAM) $(PROGRAM)
+	c1541 -attach $(DISKIMAGE) -write ui.bin ui
+	c1541 -attach $(DISKIMAGE) -write wa.chr wa
+  # replace this with a foreach
 
 test: $(DISKIMAGE)
 	$(PREEMUCMD)
@@ -339,14 +347,6 @@ all test clean:
 
 endif # $(words $(TARGETLIST)),1
 
-# create the d64, format it and attach the program
-
-diskimage:
-	c1541 -format diskname,id d64 $(DISKIMAGE) -attach $(DISKIMAGE) -write $(PROGRAM) $(PROGRAM)
-	c1541 -attach $(DISKIMAGE) -write ui.bin ui
-	c1541 -attach $(DISKIMAGE) -write wa.chr wa
-# c1541 -format diskname,id d64 $(PROGRAM).d64 -attach $(PROGRAM).d64 -write $(PROGRAM).c64 $(PROGRAM)
-# replace this with foreach on specific file types, maybe?
 
 
 OBJDIRLIST := $(wildcard $(OBJDIR)/*)
