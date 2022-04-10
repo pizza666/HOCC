@@ -20,6 +20,7 @@ int main(void)
         #endif
 
         input();
+        playerMove();
     }
     return 0;
 }

@@ -22,6 +22,8 @@
 #define DEBUG
 
 /* custom includes */
+#include "global.h"
+#include "input.h"
 #include "player.h"
 
 /* memory map and defines*/
@@ -36,6 +38,7 @@
 unsigned char buffer[2048];
 unsigned char st;
 unsigned char keyin;
+Player p;
 
 unsigned char fileOpen(const char *filename, 
             unsigned char lfn)
@@ -95,64 +98,9 @@ int charsetLoad(const char *filename)
     //memcpy (VIC_CHR_BANK_4, &buffer, sizeof(buffer));
 }
 
-/* handle all inputs */
-int input()
-{
-    keyin = cgetc();
-    /* playerMove(p,keyin); */
-
-    switch(keyin)
-    {
-        case 'q':
-            p.d -= 64;
-            break;
-        case 'e':
-            p.d += 64;
-            break;
-        case 'w':
-            switch (p.d)
-            {
-                case PD_NORTH: p.y--; break;
-                case PD_EAST : p.x++; break;
-                case PD_SOUTH: p.y++; break;
-                case PD_WEST : p.x--; break;
-            }
-            break;
-        case 's':
-            switch(p.d)
-            {
-                case PD_NORTH: p.y++; break;
-                case PD_EAST : p.x--; break;
-                case PD_SOUTH: p.y--; break;
-                case PD_WEST : p.x++; break;
-            }
-            break;
-        case 'a':
-            switch (p.d)
-            {
-                case PD_NORTH: p.x--; break;
-                case PD_EAST : p.y--; break;
-                case PD_SOUTH: p.x++; break;
-                case PD_WEST : p.y++; break;
-                break;
-            }
-            break;
-        case 'd':
-            switch(p.d)
-            {
-                case PD_NORTH: p.x++; break;
-                case PD_EAST : p.y++; break;
-                case PD_SOUTH: p.x--; break;
-                case PD_WEST : p.y--; break;
-                break;
-            }
-            break;
-    }
-}
-
 int gameInit()
 {
-    //p = playerNew(0, 0, 0);
+    playerReset();
 }
 
 #ifdef DEBUG
@@ -160,10 +108,7 @@ void debug()
 {
         textcolor(1);
         gotoxy(0,24);   
-        cprintf("x%03d ",p.x);
-        cprintf("y%03d ",p.y);
-        cprintf("d%03d", p.d);
-
+        cprintf("x%03d y%03d d%03d %c",p.x,p.y,p.d,keyin);
 }
 #endif
 
