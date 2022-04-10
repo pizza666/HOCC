@@ -1,3 +1,10 @@
+/********************************************************
+ * player.c
+ ********************************************************
+ * Player functionality
+ * https://github.com/pizza666/HOCC by Jan-Dirk Lehde
+ *******************************************************/
+
 #include "global.h"
 #include "player.h"
 
