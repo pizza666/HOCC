@@ -102,8 +102,8 @@ endef
 
 # Compiler and assembler flags for generating listings
 define _listing_
-  CFLAGS += --listing $$(@:.o=.lst)
-  ASFLAGS += --listing $$(@:.o=.lst)
+  CFLAGS += --listing $$(@:.o=.lst) --add-source
+  ASFLAGS += --listing $$(@:.o=.lst) --add-source
   REMOVES += $(addsuffix .lst,$(basename $(OBJECTS)))
 endef
 

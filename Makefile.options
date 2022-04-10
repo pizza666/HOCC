@@ -1,1 +1,1 @@
-_OPTIONS_=mapfile,labelfile,debugfile,CC65_TARGET=c64
+_OPTIONS_=mapfile,labelfile,debugfile,listing,CC65_TARGET=c64
