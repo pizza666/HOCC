@@ -61,13 +61,14 @@ void debug()
 {
         textcolor(1);
         gotoxy(0,24);   
-        printf("x%03d y%03d d%03d %c",p.x,p.y,p.d,keyin);
+        cprintf("x%03d y%03d d%03d %c",p.x,p.y,p.d,keyin);
 }
 #endif
 
 /* initialize ui and game screen */
-int screenInit()
+void screenInit()
 {
+
     charsetLoad("wa");
 
     /* set colors */
@@ -80,6 +81,7 @@ int screenInit()
     /* setup char and video ram */
     VIC.addr = 0b00000011;
     CIA2.pra &= 0b11111100;
+    *(char*) SCREEN_RAM_HI_PTR = SCREENRAM_HI;
 
     /* ..draw  */
     uiDraw();
