@@ -19,7 +19,7 @@ unsigned char fileOpen(const char *filename,
     dev = (*(unsigned char*) LAST_USED_DEV);
     
     /* default it to 8 if its not set yet */
-    if(dev==0)
+    if(dev<8)
     {
         dev = 8;
     }

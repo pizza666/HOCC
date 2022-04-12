@@ -12,15 +12,19 @@ int main(void)
 {
     screenInit();
     gameInit();
+    canvasLoad();
     
     while(1)
     {
         #ifdef DEBUG
-            debug();
+           debug();
         #endif
 
         input();
         playerMove();
+        if(keyin=='1') canvasDrawWall(N1);
+        if(keyin=='2') canvasDrawWall(HO);
+                
     }
     return 0;
 }

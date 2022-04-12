@@ -325,6 +325,8 @@ diskimage:
 	c1541 -format diskname,id d64 $(DISKIMAGE) -attach $(DISKIMAGE) -write $(PROGRAM) $(PROGRAM)
 	c1541 -attach $(DISKIMAGE) -write ui.bin ui
 	c1541 -attach $(DISKIMAGE) -write wa.chr wa
+	c1541 -attach $(DISKIMAGE) -write n1.bin n1
+	c1541 -attach $(DISKIMAGE) -write ho.bin ho
   # replace this with a foreach
 
 test: $(DISKIMAGE)

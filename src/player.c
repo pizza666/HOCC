@@ -10,7 +10,9 @@
 
 void playerReset()
 {
-    p.x, p.y, p.d = 0;
+    p.x = 0;
+    p.y = 0;
+    p.d = 0;
 }
 
 void playerMove()
