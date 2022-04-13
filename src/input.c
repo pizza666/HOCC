@@ -10,7 +10,7 @@
 #include "input.h"
 
 /* handle all inputs */
-int input()
+void input()
 {
     keyin = cgetc();
 }

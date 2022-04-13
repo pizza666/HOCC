@@ -1,7 +1,7 @@
 /*********************************************************
  * canvas.h 
  *********************************************************
- * Main include for Halls of Curruption
+ * Main include for Halls of Corruption
  * https://github.com/pizza666/HOCC by Jan-Dirk Lehde
  *********************************************************/
 
@@ -37,10 +37,16 @@
 #define WIDTH 2U
 #define HEIGHT 3U
 
-void canvasDrawWall(unsigned char wallNumber);
-void canvasDrawHorizon();
+typedef struct CanvasData
+{
+    unsigned char n1_chars[208];
+    unsigned char n1_color[208];
+    unsigned char ho_chars[270];
+    unsigned char ho_color[270];
+} CanvasData;
+
 void canvasLoad();
-void copyWall(unsigned char *chars, unsigned char *color, unsigned char size, unsigned char wallNumber);
+void copyWall(const unsigned char *chars, const unsigned char *color, const unsigned char size, const unsigned char wallNumber);
 
 /* End of canvas.h */
 #endif

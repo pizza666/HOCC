@@ -8,7 +8,7 @@
 #ifndef _INPUT_H
 #define _INPUT_H
 
-int input();
+void input();
 
 /* end of input.h */
 #endif

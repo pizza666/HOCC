@@ -8,17 +8,8 @@
 #include <c64.h>
 #include <string.h>
 #include "global.h"
-#include "file.h"
 #include "canvas.h"
-
-
-typedef struct CanvasData_T
-{
-    unsigned char n1_chars[208];
-    unsigned char n1_color[208];
-    unsigned char ho_chars[270];
-    unsigned char ho_color[270];
-} CanvasData;
+#include "file.h"
 
 const unsigned char meta[12][4] = {
     {0,0,18,15},
@@ -35,9 +26,7 @@ const unsigned char meta[12][4] = {
     {0,0,18,15}
 };
 
-CanvasData canvasData;
-
-void copyWall(unsigned char *chars, unsigned char *color,unsigned char size,unsigned char wallNumber)
+void copyWall(const unsigned char *chars, const unsigned char *color, const unsigned char size, const unsigned char wallNumber)
 {
     unsigned char i = 0;
     unsigned char row = 0;
@@ -52,19 +41,6 @@ void copyWall(unsigned char *chars, unsigned char *color,unsigned char size,unsi
     }
 }
 
-void canvasDrawWall(unsigned char wallNumber)
-{
-    switch(wallNumber)
-    {
-        case N1:
-            copyWall(canvasData.n1_chars,canvasData.n1_color,sizeof(canvasData.n1_chars),N1);
-            break;
-        case HO:
-            copyWall(canvasData.ho_chars,canvasData.ho_color,sizeof(canvasData.ho_chars),HO);
-            break;
-    }
-}
-
 void canvasLoad()
 {
     /* we should load whole "tilesets" in the future from a single file*/
@@ -75,8 +51,4 @@ void canvasLoad()
     fileOpen("ho",2);
     fileRead(canvasData.ho_chars);
     fileClose(2);
-}
-
-void canvasDrawHorizon()
-{
 }

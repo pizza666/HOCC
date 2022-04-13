@@ -13,14 +13,12 @@
 #define PD_SOUTH 128
 #define PD_WEST  192
 
-static struct Player
+typedef struct Player
 {
     unsigned char x;
     unsigned char y;
     unsigned char d;
-}; 
-
-typedef struct Player Player;
+} Player; 
 
 void playerMove();
 void playerReset();

@@ -9,6 +9,7 @@
 #define _GLOBAL_H
 
 #include "player.h"
+#include "canvas.h"
 
 /* global defines */
 #define SCREENRAM 0xC000
@@ -28,5 +29,6 @@
 extern unsigned char buffer[2048];
 extern unsigned char keyin;
 extern Player p;
+extern CanvasData canvasData;
 
 #endif
