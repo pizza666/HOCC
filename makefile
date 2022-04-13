@@ -23,8 +23,10 @@ PROGRAM_NO_EXT := $(PROGRAM)
 # diskimage
 DISKIMAGE := $(PROGRAM).d64
 
-# Add your data files here which get attached to the d64 file
-# implement the extensions for diskimage inclustion here
+# Add your data directory here. alle files will be added to
+# the diskimage without extension to keep the d64 image clean
+
+DATADIR := data
 
 # Path(s) to additional libraries required for linking the program
 # Use only if you don't want to place copies of the libraries in SRCDIR
@@ -195,10 +197,12 @@ ifeq ($(shell echo),)
   MKDIR = mkdir -p $1
   RMDIR = rmdir $1
   RMFILES = $(RM) $1
+  D64ATTACH = c1541 -attach $(DISKIMAGE) -write $(DATADIR)/$1 $2
 else
   MKDIR = mkdir $(subst /,\,$1)
   RMDIR = rmdir $(subst /,\,$1)
   RMFILES = $(if $1,del /f $(subst /,\,$1))
+  D64ATTACH = c1541 -attach $(DISKIMAGE) -write $(DATADIR)/$1 $2
 endif
 COMMA := ,
 SPACE := $(N/A) $(N/A)
@@ -251,6 +255,10 @@ LIBS += $(wildcard $(SRCDIR)/$(TARGETLIST)/*.lib)
 # Add to CONFIG something like 'src/c64/bar.cfg src/foo.cfg'.
 CONFIG += $(wildcard $(SRCDIR)/$(TARGETLIST)/*.cfg)
 CONFIG += $(wildcard $(SRCDIR)/*.cfg)
+
+# data
+DATA += $(notdir $(wildcard $(DATADIR)/*.bin))
+DATA += $(notdir $(wildcard $(DATADIR)/*.chr))
 
 # Select CONFIG file to use. Target specific configs have higher priority.
 ifneq ($(word 2,$(CONFIG)),)
@@ -305,10 +313,10 @@ vpath %.c $(SRCDIR)/$(TARGETLIST) $(SRCDIR)
 $(TARGETOBJDIR)/%.o: %.c | $(TARGETOBJDIR)
 	cl65 -t $(CC65TARGET) -c --create-dep $(@:.o=.d) -Wc "--debug-tables" -Wc "$(@:.o=.tab)" $(CFLAGS) -o $@ $<
 
-vpath %.s $(SRCDIR)/$(TARGETLIST) $(SRCDIR)
+#vpath %.s $(SRCDIR)/$(TARGETLIST) $(SRCDIR)
 
-$(TARGETOBJDIR)/%.o: %.s | $(TARGETOBJDIR)
-	cl65 -t $(CC65TARGET) -c --create-dep $(@:.o=.d) $(ASFLAGS) -o $@ $<
+#$(TARGETOBJDIR)/%.o: %.s | $(TARGETOBJDIR)
+#	cl65 -t $(CC65TARGET) -c --create-dep $(@:.o=.d) $(ASFLAGS) -o $@ $<
 
 vpath %.asm $(SRCDIR)/$(TARGETLIST) $(SRCDIR)
 
@@ -320,14 +328,10 @@ vpath %.a65 $(SRCDIR)/$(TARGETLIST) $(SRCDIR)
 $(PROGRAM): $(CONFIG) $(OBJECTS) $(LIBS)
 	cl65 -t $(CC65TARGET) $(LDFLAGS) -o $@ $(patsubst %.cfg,-C %.cfg,$^)
 
-# create the d64, format it and attach the program
+# create the d64, format it and attach the program and data files
 diskimage:
-	c1541 -format diskname,id d64 $(DISKIMAGE) -attach $(DISKIMAGE) -write $(PROGRAM) $(PROGRAM)
-	c1541 -attach $(DISKIMAGE) -write ui.bin ui
-	c1541 -attach $(DISKIMAGE) -write wa.chr wa
-	c1541 -attach $(DISKIMAGE) -write n1.bin n1
-	c1541 -attach $(DISKIMAGE) -write ho.bin ho
-  # replace this with a foreach
+	c1541 -format diskname,id d64 $(DISKIMAGE) -attach $(DISKIMAGE) -write $(PROGRAM) $(PROGRAM_NO_EXT)
+	$(foreach f,$(DATA),-$(call D64ATTACH,$f,$(basename $f))$(NEWLINE))
 
 test: $(DISKIMAGE)
 	$(PREEMUCMD)
