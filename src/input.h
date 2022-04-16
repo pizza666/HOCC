@@ -8,6 +8,9 @@
 #ifndef _INPUT_H
 #define _INPUT_H
 
+/* keybard layout */
+#define KEY_MAP 'm'
+
 void input();
 
 /* end of input.h */

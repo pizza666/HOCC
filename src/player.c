@@ -7,31 +7,97 @@
 
 #include "global.h"
 #include "player.h"
+#include "canvas.h"
 
 void playerReset()
 {
-    p.x = 0;
-    p.y = 0;
+    p.x = 1;
+    p.y = 8;
     p.d = 0;
 }
 
-void playerMove()
+void playerGetFov()
+{
+    switch(p.d)
+    {
+        case PD_NORTH:
+            p.ico = PICO_NORTH;
+            fov[W3] = map.data[p.y-3][p.x-1];
+            fov[N3] = map.data[p.y-3][p.x];
+            fov[E3] = map.data[p.y-3][p.x+1];
+            fov[W2] = map.data[p.y-2][p.x-1];
+            fov[N2] = map.data[p.y-2][p.x];
+            fov[E2] = map.data[p.y-2][p.x+1];
+            fov[W1] = map.data[p.y-1][p.x-1];
+            fov[N1] = map.data[p.y-1][p.x];
+            fov[E1] = map.data[p.y-1][p.x+1];
+            fov[W0] = map.data[p.y][p.x-1];
+            fov[E0] = map.data[p.y][p.x+1];
+        break;
+        case PD_SOUTH:
+            p.ico = PICO_SOUTH;
+            fov[W3] = map.data[p.y+3][p.x+1];
+            fov[N3] = map.data[p.y+3][p.x];
+            fov[E3] = map.data[p.y+3][p.x-1];
+            fov[W2] = map.data[p.y+2][p.x+1];
+            fov[N2] = map.data[p.y+2][p.x];
+            fov[E2] = map.data[p.y+2][p.x-1];
+            fov[W1] = map.data[p.y+1][p.x+1];
+            fov[N1] = map.data[p.y+1][p.x];
+            fov[E1] = map.data[p.y+1][p.x-1];
+            fov[W0] = map.data[p.y][p.x+1];
+            fov[E0] = map.data[p.y][p.x-1];
+        break;
+        case PD_EAST:
+        	p.ico = PICO_EAST;
+            fov[W1] = map.data[p.y-1][p.x+1];
+            fov[W2] = map.data[p.y-1][p.x+2];
+            fov[W3] = map.data[p.y-1][p.x+3];
+            fov[E1] = map.data[p.y+1][p.x+1];
+            fov[E2] = map.data[p.y+1][p.x+2];
+            fov[E3] = map.data[p.y+1][p.x+3];
+            fov[N1] = map.data[p.y][p.x+1];
+            fov[N2] = map.data[p.y][p.x+2];
+            fov[N3] = map.data[p.y][p.x+3];
+            fov[W0] = map.data[p.y-1][p.x];
+            fov[E0] = map.data[p.y+1][p.x];
+        break;
+        case PD_WEST:
+            p.ico = PICO_WEST;
+            fov[W1] = map.data[p.y+1][p.x-1];
+            fov[W2] = map.data[p.y+1][p.x-2];
+            fov[W3] = map.data[p.y+1][p.x-3];
+            fov[E1] = map.data[p.y-1][p.x-1];
+            fov[E2] = map.data[p.y-1][p.x-2];
+            fov[E3] = map.data[p.y-1][p.x-3];
+            fov[N1] = map.data[p.y][p.x-1];
+            fov[N2] = map.data[p.y][p.x-2];
+            fov[N3] = map.data[p.y][p.x-3];
+            fov[W0] = map.data[p.y+1][p.x];
+            fov[E0] = map.data[p.y-1][p.x];
+        break;
+    }
+}
+
+unsigned char playerMove()
 {
     switch(keyin)
     {
         case 'q':
             p.d -= 64;
-            break;
+            return 1;
+        break;
         case 'e':
             p.d += 64;
-            break;
+            return 1;
+        break;
         case 'w':
             switch (p.d)
             {
-                case PD_NORTH: p.y--; break;
-                case PD_EAST : p.x++; break;
-                case PD_SOUTH: p.y++; break;
-                case PD_WEST : p.x--; break;
+                case PD_NORTH: if (map.data[p.y-1][p.x] !=W) {p.y--; return 1;} break;
+                case PD_EAST : if (map.data[p.y][p.x+1] !=W) {p.x++; return 1;} break;
+                case PD_SOUTH: if (map.data[p.y+1][p.x] !=W) {p.y++; return 1;} break;
+                case PD_WEST : if (map.data[p.y][p.x-1] !=W) {p.x--; return 1;} break;
             }
             break;
         case 's':
@@ -64,4 +130,5 @@ void playerMove()
             }
             break;
     }
-};
+    return 0; // player hasnt moved
+}

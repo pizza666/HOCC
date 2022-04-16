@@ -12,5 +12,5 @@
 /* handle all inputs */
 void input()
 {
-    keyin = cgetc();
+    keyin = cgetc();          
 }

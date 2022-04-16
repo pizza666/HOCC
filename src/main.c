@@ -9,14 +9,24 @@
 #include "global.h"
 #include "hoc.h"
 #include "input.h"
+#include "map.h"
 
 int main(void)
 {
+    clrscr();
+    colorSetup();
+    textcolor(1);
+    mapLoad();
+    cprintf("loading...");
+    uiDraw();
+    canvasLoad();
     screenInit();
     gameInit();
-    canvasLoad();
-    uiDraw();
-    
+
+    playerGetFov();
+    canvasDraw();
+    mapDraw();
+
     while(1)
     {
         #ifdef DEBUG
@@ -24,9 +34,14 @@ int main(void)
         #endif
 
         input();
-        playerMove();
-        if(keyin=='1') copyWall(canvasData.n1_chars,canvasData.n1_color,sizeof(canvasData.n1_chars),N1);
-        if(keyin=='2') copyWall(canvasData.ho_chars,canvasData.ho_color,sizeof(canvasData.ho_chars),HO);
+
+        if(playerMove())
+        {
+            playerGetFov();
+            canvasDraw();
+        }
+
+        mapDraw();
                 
     }
     return 0;

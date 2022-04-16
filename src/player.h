@@ -13,15 +13,22 @@
 #define PD_SOUTH 128
 #define PD_WEST  192
 
+#define PICO_NORTH 245
+#define PICO_EAST  PICO_NORTH+1
+#define PICO_SOUTH PICO_NORTH+2
+#define PICO_WEST  PICO_NORTH+3
+
+
 typedef struct Player
 {
     unsigned char x;
     unsigned char y;
     unsigned char d;
+    unsigned char ico;
 } Player; 
-
-void playerMove();
+unsigned char playerMove();
 void playerReset();
+void playerGetFov();
 
 /* End of player.h */
 #endif

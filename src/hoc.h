@@ -32,6 +32,9 @@ void uiDraw();
 void charsetLoad(const char *filename);
 void gameInit();
 void screenInit();
+void clearScreen();
+void colorSetup();
+void vicSetup();
 
 #ifdef DEBUG
 void debug();
