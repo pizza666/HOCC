@@ -11,7 +11,7 @@
 #include "canvas.h"
 #include "file.h"
 
-const unsigned char meta[12][4] = {
+const unsigned char meta[13][4] = {
     {0,0,18,15},  // HO 0 
     {0,6,6,3},    // W3 1 
     {12,6,6,3},    // E3 2
@@ -23,7 +23,8 @@ const unsigned char meta[12][4] = {
     {14,1,4,13},  // E1 8
     {1,1,16,13},  // N1 9
     {0,0,1,15},   // W0 10
-    {17,0,1,15}   // E0 11
+    {17,0,1,15},   // E0 11
+    {0,0,18,15}   // buffer
 };
 
 const int wallDataOffsets[12] = {
@@ -40,6 +41,9 @@ const int wallDataOffsets[12] = {
     0x0010,    // W0 10
     0x0011     // E0 11
 };
+
+unsigned char canvasCharsBuffer[600];
+unsigned char canvasColorBuffer[600];
 
 void canvasWallDraw(const unsigned char wallNumber)
 {
@@ -71,13 +75,50 @@ void canvasHorizonDraw()
     }
 }
 
+void canvaseWallToBuffer(const unsigned char wallNumber)
+{
+    unsigned char i=0;
+    int row = wallDataOffsets[wallNumber];
+    int sp = (SCREENWIDTH*meta[wallNumber][POSY]) + meta[wallNumber][POSX];
+    
+    for(i;i<=meta[wallNumber][HEIGHT]-1;++i)
+    {
+        memcpy(&canvasCharsBuffer[sp],&buffer[row],meta[wallNumber][WIDTH]);
+        memcpy(&canvasColorBuffer[sp],&buffer[SCREENSIZE+row],meta[wallNumber][WIDTH]);
+        sp += SCREENWIDTH;
+        row += SCREENWIDTH;
+    }
+}
+
 void canvasDraw()
 {
-    int i=1;
-    canvasHorizonDraw();
-    for(i;i<=12;++i)
+    unsigned char i = 0;
+    int row = 0;
+    int sp = 0;
+
+    //canvasHorizonDraw();
+    for(i;i<=14;++i)
     {
-        if(fov[i]==W) canvasWallDraw(i);
+        memcpy(&canvasCharsBuffer[sp],&ui[row],meta[HO][WIDTH]);
+        memcpy(&canvasColorBuffer[sp],&ui[SCREENSIZE+row],meta[HO][WIDTH]);
+        sp += SCREENWIDTH;
+        row += SCREENWIDTH;
+    }
+
+    for(i=1;i<=12;++i)
+    {
+        if(fov[i]==W) canvaseWallToBuffer(i);
+    }
+    
+    sp = 0;
+    row = 0;
+
+    for(i=0;i<=14;++i)
+    {
+        memcpy(SCREENRAM_PTR+sp,&canvasCharsBuffer[row],18);
+        memcpy(COLOR_RAM+sp,&canvasColorBuffer[row],18);
+        sp += SCREENWIDTH;
+        row += SCREENWIDTH;
     }
 }
 
