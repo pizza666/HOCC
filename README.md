@@ -6,7 +6,7 @@ Original ASM project from https://github.com/pizza666/HOC/
 
 ## Build instructions
 
-Needs cc65 V2.19 - https://cc65.github.io/
+Needs cc65 V2.19 - https://cc65.github.io/ and VICE 3.6.1
 
 1. Compile with:
 make
