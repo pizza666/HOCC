@@ -8,8 +8,9 @@ Original ASM project from https://github.com/pizza666/HOC/
 
 Needs cc65 V2.19 - https://cc65.github.io/ and VICE 3.6.1
 
-Compile with:
+1. Compile with:  
 make
 
-Start with:
+
+2. Start with:  
 make test
