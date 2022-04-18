@@ -9,17 +9,40 @@
 #include <string.h>
 #include <conio.h>
 #include <c64.h>
+#include <stdio.h>
 #include "global.h"
 #include "map.h"
 #include "file.h"
 
-void mapLoad()
+void mapLoad(unsigned char mid)
 {
-    int i = 0;
-    playerReset();
-    fileOpen("m0",2);
-    fileRead(&(map.data));
+    unsigned char f[4];
+    sprintf(f,"m%03d",mid);
+    fileOpen(f,2);
+    fileRead(&map);
     fileClose(2);
+}
+
+void mapNext(){
+    if(p.y==0) // player exits map north
+    {
+        mapLoad(map.meta[EXITN]);
+        p.y=10;
+    }
+    if(p.y==MAPHEIGHT-1){
+        mapLoad(map.meta[EXITS]);
+        p.y=1;
+    }
+    if(p.x==0)
+    {
+        mapLoad(map.meta[EXITW]);
+        p.x=MAPWIDTH;
+    }
+    if(p.x==MAPWIDTH-1)
+    {
+        mapLoad(map.meta[EXITE]);
+        p.x=1;
+    }
 }
 
 void mapDraw()

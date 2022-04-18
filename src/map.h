@@ -14,13 +14,23 @@
 #define MAPHEIGHT 12
 #define MAPWIDTH 20
 
+#define MID 0
+#define EXITN 1
+#define EXITE 2
+#define EXITS 3
+#define EXITW 4
+#define MCHR 5
+
+
 typedef struct Map
 {
+    unsigned char meta[20];
     unsigned char data[12][20];
 } Map;
 
 void mapDraw();
 void mapLoad();
+void mapNext();
 
 
 #endif

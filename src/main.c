@@ -13,14 +13,15 @@
 
 int main(void)
 {
+    screenInit();
     clrscr();
     colorSetup();
     textcolor(1);
-    mapLoad();
-    cprintf("loading...");
+    mapLoad(1);
+    cprintf("loading");
     uiDraw();
     canvasLoad();
-    screenInit();
+
     gameInit();
 
     playerGetFov();
@@ -37,12 +38,11 @@ int main(void)
 
         if(playerMove())
         {
+            mapNext();
             playerGetFov();
             canvasDraw();
-        }
-
-        mapDraw();
-                
+            mapDraw();
+        }            
     }
     return 0;
 }

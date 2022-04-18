@@ -45,35 +45,35 @@ const int wallDataOffsets[12] = {
 unsigned char canvasCharsBuffer[600];
 unsigned char canvasColorBuffer[600];
 
-void canvasWallDraw(const unsigned char wallNumber)
-{
-    unsigned char i=0;
-    int row = wallDataOffsets[wallNumber];
-    int sp = (SCREENWIDTH*meta[wallNumber][POSY]) + meta[wallNumber][POSX];
+// void canvasWallDraw(const unsigned char wallNumber)
+// {
+//     unsigned char i=0;
+//     int row = wallDataOffsets[wallNumber];
+//     int sp = (SCREENWIDTH*meta[wallNumber][POSY]) + meta[wallNumber][POSX];
     
-    for(i;i<=meta[wallNumber][HEIGHT]-1;++i)
-    {
-        memcpy(SCREENRAM_PTR+sp,&buffer[row],meta[wallNumber][WIDTH]);
-        memcpy(COLOR_RAM+sp,&buffer[SCREENSIZE+row],meta[wallNumber][WIDTH]);
-        sp += SCREENWIDTH;
-        row += SCREENWIDTH;
-    }
-}
+//     for(i;i<=meta[wallNumber][HEIGHT]-1;++i)
+//     {
+//         memcpy(SCREENRAM_PTR+sp,&buffer[row],meta[wallNumber][WIDTH]);
+//         memcpy(COLOR_RAM+sp,&buffer[SCREENSIZE+row],meta[wallNumber][WIDTH]);
+//         sp += SCREENWIDTH;
+//         row += SCREENWIDTH;
+//     }
+// }
 
-void canvasHorizonDraw()
-{
-    unsigned char i = 0;
-    int row = wallDataOffsets[HO];
-    int sp = (SCREENWIDTH*meta[HO][POSY]) + meta[HO][POSX];
+// void canvasHorizonDraw()
+// {
+//     unsigned char i = 0;
+//     int row = wallDataOffsets[HO];
+//     int sp = (SCREENWIDTH*meta[HO][POSY]) + meta[HO][POSX];
     
-    for(i;i<=meta[HO][HEIGHT]-1;++i)
-    {
-        memcpy(SCREENRAM_PTR+sp,&ui[row],meta[HO][WIDTH]);
-        memcpy(COLOR_RAM+sp,&ui[SCREENSIZE+row],meta[HO][WIDTH]);
-        sp += SCREENWIDTH;
-        row += SCREENWIDTH;
-    }
-}
+//     for(i;i<=meta[HO][HEIGHT]-1;++i)
+//     {
+//         memcpy(SCREENRAM_PTR+sp,&ui[row],meta[HO][WIDTH]);
+//         memcpy(COLOR_RAM+sp,&ui[SCREENSIZE+row],meta[HO][WIDTH]);
+//         sp += SCREENWIDTH;
+//         row += SCREENWIDTH;
+//     }
+// }
 
 void canvaseWallToBuffer(const unsigned char wallNumber)
 {

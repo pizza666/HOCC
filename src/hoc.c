@@ -38,6 +38,9 @@ void charsetLoad(const char *filename)
 
 void gameInit()
 {
+    p.x = 1;
+    p.y = 8;
+    p.d = 0;
 }
 
 #ifdef DEBUG
@@ -45,7 +48,7 @@ void debug()
 {
     textcolor(1);
     gotoxy(0,24);   
-    cprintf("x%03d y%03d d%03d %c",p.x,p.y,p.d,keyin);
+    cprintf("x%03d y%03d d%03d k%c m%03d",p.x,p.y,p.d,keyin,map.meta[MID]);
 }
 #endif
 
