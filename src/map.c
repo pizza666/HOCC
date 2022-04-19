@@ -53,7 +53,7 @@ void mapDraw()
 
     for(i=0;i<=MAPHEIGHT-1;++i)
     {
-        memcpy(MAPPOS_PTR[row], map.data[i],MAPWIDTH);
+        memcpy(&MAPPOS_PTR[row], map.data[i],MAPWIDTH);
         if(i==p.y) MAPPOS_PTR[row+p.x] = p.ico;
         row +=SCREENWIDTH;
     }

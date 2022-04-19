@@ -79,8 +79,11 @@ void playerGetFov()
     }
 }
 
+/// player movement function with collision detection on walls
 unsigned char playerMove()
 {
+
+
     switch(keyin)
     {
         case 'q':
@@ -94,41 +97,41 @@ unsigned char playerMove()
         case 'w':
             switch (p.d)
             {
-                case PD_NORTH: if (map.data[p.y-1][p.x] !=W) {p.y--; return 1;} break;
-                case PD_EAST : if (map.data[p.y][p.x+1] !=W) {p.x++; return 1;} break;
-                case PD_SOUTH: if (map.data[p.y+1][p.x] !=W) {p.y++; return 1;} break;
-                case PD_WEST : if (map.data[p.y][p.x-1] !=W) {p.x--; return 1;} break;
+                case PD_NORTH: if(map.data[p.y-1][p.x] !=W) {p.y--; return 1;} break;
+                case PD_EAST : if(map.data[p.y][p.x+1] !=W) {p.x++; return 1;} break;
+                case PD_SOUTH: if(map.data[p.y+1][p.x] !=W) {p.y++; return 1;} break;
+                case PD_WEST : if(map.data[p.y][p.x-1] !=W) {p.x--; return 1;} break;
             }
             break;
         case 's':
             switch(p.d)
             {
-                case PD_NORTH: p.y++; break;
-                case PD_EAST : p.x--; break;
-                case PD_SOUTH: p.y--; break;
-                case PD_WEST : p.x++; break;
+                case PD_NORTH: if(map.data[p.y+1][p.x] !=W) {p.y++; return 1;} break;
+                case PD_EAST : if(map.data[p.y][p.x-1] !=W) {p.x--; return 1;} break;
+                case PD_SOUTH: if(map.data[p.y-1][p.x] !=W) {p.y--; return 1;} break;
+                case PD_WEST : if(map.data[p.y][p.x+1] !=W) {p.x++; return 1;} break;
             }
             break;
         case 'a':
             switch (p.d)
             {
-                case PD_NORTH: p.x--; break;
-                case PD_EAST : p.y--; break;
-                case PD_SOUTH: p.x++; break;
-                case PD_WEST : p.y++; break;
+                case PD_NORTH: if(map.data[p.y][p.x-1] !=W) {p.x--; return 1;} break;
+                case PD_EAST : if(map.data[p.y-1][p.x] !=W) {p.y--; return 1;} break;
+                case PD_SOUTH: if(map.data[p.y][p.x+1] !=W) {p.x++; return 1;} break;
+                case PD_WEST : if(map.data[p.y+1][p.x] !=W) {p.y++; return 1;} break;
                 break;
             }
             break;
         case 'd':
             switch(p.d)
             {
-                case PD_NORTH: p.x++; break;
-                case PD_EAST : p.y++; break;
-                case PD_SOUTH: p.x--; break;
-                case PD_WEST : p.y--; break;
+                case PD_NORTH: if(map.data[p.y][p.x+1] !=W) {p.x++; return 1; } break;
+                case PD_EAST : if(map.data[p.y+1][p.x] !=W) {p.y++; return 1; } break;
+                case PD_SOUTH: if(map.data[p.y][p.x-1] !=W) {p.x--; return 1; } break;
+                case PD_WEST : if(map.data[p.y-1][p.x] !=W) {p.y--; return 1; } break;
                 break;
             }
             break;
     }
-    return 0; // player hasnt moved
+    return 0; // player hasn't moved
 }
