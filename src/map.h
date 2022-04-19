@@ -11,6 +11,7 @@
 #define _ 35
 
 #define MAPPOS (SCREENRAM+0x8B)
+#define MAPPOS_PTR ((unsigned char *) MAPPOS)
 #define MAPHEIGHT 12
 #define MAPWIDTH 20
 

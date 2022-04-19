@@ -53,12 +53,9 @@ void mapDraw()
 
     for(i=0;i<=MAPHEIGHT-1;++i)
     {
-        memcpy(MAPPOS+row, map.data[i],MAPWIDTH);
+        memcpy(MAPPOS_PTR[row], map.data[i],MAPWIDTH);
+        if(i==p.y) MAPPOS_PTR[row+p.x] = p.ico;
         row +=SCREENWIDTH;
     }
-
-    gotoxy(19+p.x,3+p.y);
-    textcolor(COLOR_BLACK);
-    cputc(p.ico);
 
 }

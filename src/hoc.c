@@ -48,7 +48,7 @@ void debug()
 {
     textcolor(1);
     gotoxy(0,24);   
-    cprintf("x%03d y%03d d%03d k%c m%03d",p.x,p.y,p.d,keyin,map.meta[MID]);
+    cprintf("x%03d y%03d d%03d k%c m%03d i%03d",p.x,p.y,p.d,keyin,map.meta[MID],p.ico);
 }
 #endif
 
