@@ -28,6 +28,10 @@ DISKIMAGE := $(PROGRAM).d64
 
 DATADIR := data
 
+# SD card for tests on real C64 with sd2iec
+
+SDCARD := d:
+
 # Path(s) to additional libraries required for linking the program
 # Use only if you don't want to place copies of the libraries in SRCDIR
 # Default: none
@@ -267,7 +271,7 @@ ifneq ($(word 2,$(CONFIG)),)
 endif
 
 .SUFFIXES:
-.PHONY: all diskimage test clean zap love
+.PHONY: all diskimage test clean zap love sd2iec
 
 all: $(PROGRAM) diskimage
 
@@ -365,6 +369,10 @@ zap:
 
 love:
 	@echo "Not war, eh?"
+
+# copy d64 to sdcard
+sd2iec:
+	cp .\$(DISKIMAGE) $(SDCARD)\$(DISKIMAGE)
 
 ###################################################################
 ###  Place your additional targets in the additional Makefiles  ###

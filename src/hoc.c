@@ -6,6 +6,7 @@
  * https://github.com/pizza666/HOCC by Jan-Dirk Lehde
  *******************************************************/
 #include <string.h>
+#include <lz4.h>
 #include "global.h"
 #include "hoc.h"
 #include "file.h"
@@ -15,6 +16,7 @@ unsigned char ui[2000];
 unsigned char buffer[2000];
 unsigned char keyin;
 unsigned char fov[11];
+//unsigned char lzbuf[1083];
 Player p;
 Map map;
 
@@ -34,6 +36,7 @@ void charsetLoad(const char *filename)
     fileOpen(filename,2); 
     fileRead(VIC_CHR_BANK);
     fileClose(2);
+    //decompress_lz4(lzbuf,VIC_CHR_BANK,2048);
 }
 
 void gameInit()
@@ -47,7 +50,7 @@ void gameInit()
 void debug()
 {
     textcolor(1);
-    gotoxy(0,24);   
+    gotoxy(2,17);   
     cprintf("x%03d y%03d d%03d k%c m%03d i%03d",p.x,p.y,p.d,keyin,map.meta[MID],p.ico);
 }
 #endif
@@ -55,7 +58,7 @@ void debug()
 /* initialize ui and game screen */
 void screenInit()
 {
-    charsetLoad("wa");
+    charsetLoad("c000");
     colorSetup();
     vicSetup();
 }
@@ -65,7 +68,7 @@ void vicSetup()
     /* setup char and video ram */
     VIC.addr = 0b00000011;
     CIA2.pra &= 0b11111100;
-    *(unsigned char*) SCREEN_RAM_HI_PTR = SCREENRAM_HI;
+    SCREENRAM_HI_PTR = SCREENRAM_HI;
 }
 
 void colorSetup()

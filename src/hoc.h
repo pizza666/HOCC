@@ -12,7 +12,6 @@
 #include <cbm.h>
 #include <c64.h>
 #include <conio.h>
-#include <peekpoke.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>

@@ -7,8 +7,8 @@
 #ifndef _MAP_H
 #define _MAP_H
 
-#define W 175
-#define _ 35
+#define W 27
+#define _ 91
 
 #define MAPPOS (SCREENRAM+0x8B)
 #define MAPPOS_PTR ((unsigned char *) MAPPOS)

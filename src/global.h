@@ -16,7 +16,7 @@
 #define SCREENRAM 0xC000
 #define SCREENRAM_PTR ((unsigned char *) SCREENRAM)
 #define SCREENRAM_HI 0xC0
-#define SCREEN_RAM_HI_PTR 0x0288
+#define SCREENRAM_HI_PTR (*(unsigned char *) 0x0288)
 
 #define VIC_BANK_OFFSET 0xd018
 #define VIC_BANK_SETUP 0xdd00
@@ -29,6 +29,7 @@
 extern unsigned char ui[2000];
 extern unsigned char buffer[2000];
 extern unsigned char keyin;
+extern unsigned char joyin;
 extern Player p;
 extern Map map;
 extern unsigned char fov[11];

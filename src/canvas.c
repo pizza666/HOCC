@@ -125,7 +125,7 @@ void canvasDraw()
 void canvasLoad()
 {
     /* change this to match the tileset of map data later */
-    fileOpen("d0",2);
+    fileOpen("d000",2);
     fileRead(&buffer);
     fileClose(2);
 }

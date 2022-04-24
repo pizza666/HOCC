@@ -10,7 +10,14 @@
 
 /* keybard layout */
 #define KEY_MAP 'm'
+#define KEY_MOVE_FORWARD 'w'
+#define KEY_MOVE_BACKWARDS 's'
+#define KEY_MOVE_LEFT 'a'
+#define KEY_MOVE_RIGHT 'd'
+#define KEY_ROTATE_LEFT 'q'
+#define KEY_ROTATE_RIGHT 'e'
 
+void inputInit();
 void input();
 
 /* end of input.h */

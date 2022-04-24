@@ -82,8 +82,6 @@ void playerGetFov()
 /// player movement function with collision detection on walls
 unsigned char playerMove()
 {
-
-
     switch(keyin)
     {
         case 'q':

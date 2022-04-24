@@ -57,5 +57,4 @@ void mapDraw()
         if(i==p.y) MAPPOS_PTR[row+p.x] = p.ico;
         row +=SCREENWIDTH;
     }
-
 }

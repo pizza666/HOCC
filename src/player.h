@@ -13,7 +13,7 @@
 #define PD_SOUTH 128
 #define PD_WEST  192
 
-#define PICO_NORTH 171
+#define PICO_NORTH 28
 #define PICO_EAST  PICO_NORTH+1
 #define PICO_SOUTH PICO_NORTH+2
 #define PICO_WEST  PICO_NORTH+3

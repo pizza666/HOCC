@@ -11,19 +11,19 @@
 #include "input.h"
 #include "map.h"
 
+
 int main(void)
 {
     screenInit();
+
     clrscr();
     colorSetup();
     textcolor(1);
-    mapLoad(1);
+    mapLoad(0);
     cprintf("loading");
     uiDraw();
     canvasLoad();
-
     gameInit();
-
     playerGetFov();
     canvasDraw();
     mapDraw();
@@ -42,7 +42,8 @@ int main(void)
             playerGetFov();
             canvasDraw();
             mapDraw();
-        }            
+        }
+        keyin = 0;            
     }
     return 0;
 }
