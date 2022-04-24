@@ -10,6 +10,7 @@
 #include "hoc.h"
 #include "input.h"
 #include "map.h"
+#include "sprite.h"
 
 
 int main(void)
@@ -27,6 +28,7 @@ int main(void)
     playerGetFov();
     canvasDraw();
     mapDraw();
+    spriteLoad();
 
     while(1)
     {
@@ -42,8 +44,7 @@ int main(void)
             playerGetFov();
             canvasDraw();
             mapDraw();
-        }
-        keyin = 0;            
+        }     
     }
     return 0;
 }
