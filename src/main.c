@@ -11,6 +11,7 @@
 #include "input.h"
 #include "map.h"
 #include "sprite.h"
+#include "sound.h"
 
 
 int main(void)
@@ -30,6 +31,8 @@ int main(void)
     mapDraw();
     spriteLoad();
 
+
+
     while(1)
     {
         #ifdef DEBUG
@@ -38,13 +41,19 @@ int main(void)
 
         input();
 
+        if(playerAttack())
+        {
+            soundPlaySfx(SFX_ATTACK);
+        }
+
         if(playerMove())
         {
+            soundPlaySfx(SFX_WALK);
             mapNext();
             playerGetFov();
             canvasDraw();
             mapDraw();
-        }     
+        } 
     }
     return 0;
 }

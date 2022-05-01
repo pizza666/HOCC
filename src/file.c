@@ -6,6 +6,8 @@
  ********************************************************/
 
 #include <cbm.h>
+#include <string.h>
+#include <lz4.h>
 #include "global.h"
 #include "file.h"
 

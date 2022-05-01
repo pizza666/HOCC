@@ -27,8 +27,10 @@ typedef struct Player
     unsigned char ico;
 } Player; 
 unsigned char playerMove();
+unsigned char playerAttack();
 void playerReset();
 void playerGetFov();
+
 
 /* End of player.h */
 #endif

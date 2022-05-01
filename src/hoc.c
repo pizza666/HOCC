@@ -11,21 +11,24 @@
 #include "hoc.h"
 #include "file.h"
 #include "map.h"
+#include "sound.h"
 
 unsigned char ui[2000];
 unsigned char buffer[2000];
 unsigned char keyin;
 unsigned char fov[11];
-//unsigned char lzbuf[1083];
+unsigned char lzbuffer[1074];
+
 Player p;
 Map map;
 
 void uiDraw()
 {
     // load ui charmap
-    fileOpen("ui",2);
-    fileRead(ui);
+    fileOpen("uilz",2);
+    fileRead(lzbuffer);
     fileClose(2);
+    decompress_lz4(lzbuffer+8,ui,2000);
     memcpy(SCREENRAM_PTR, &ui, SCREENSIZE);        // chars 
     memcpy(COLOR_RAM, &ui[SCREENSIZE], SCREENSIZE);  // color
 }
@@ -34,16 +37,17 @@ void charsetLoad(const char *filename)
 {
     // load charset
     fileOpen(filename,2); 
-    fileRead(VIC_CHR_BANK);
+    fileRead(lzbuffer);
     fileClose(2);
-    //decompress_lz4(lzbuf,VIC_CHR_BANK,2048);
+    decompress_lz4(lzbuffer+8,VIC_CHR_BANK,2048);
 }
 
 void gameInit()
 {
     p.x = 1;
     p.y = 8;
-    p.d = 0;
+    p.d = 0;    
+    SID.amp = volume;
 }
 
 #ifdef DEBUG
@@ -58,7 +62,7 @@ void debug()
 /* initialize ui and game screen */
 void screenInit()
 {
-    charsetLoad("c000");
+    charsetLoad("c000lz");
     colorSetup();
     vicSetup();
 }

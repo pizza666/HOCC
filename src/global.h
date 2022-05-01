@@ -33,5 +33,7 @@ extern unsigned char joyin;
 extern Player p;
 extern Map map;
 extern unsigned char fov[11];
+extern unsigned char lzbuffer[1074];
+extern unsigned char volume;
 
 #endif

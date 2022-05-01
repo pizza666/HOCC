@@ -7,6 +7,7 @@
 
 #include <c64.h>
 #include <string.h>
+#include <lz4.h>
 #include "global.h"
 #include "canvas.h"
 #include "file.h"
@@ -44,36 +45,6 @@ const int wallDataOffsets[12] = {
 
 unsigned char canvasCharsBuffer[600];
 unsigned char canvasColorBuffer[600];
-
-// void canvasWallDraw(const unsigned char wallNumber)
-// {
-//     unsigned char i=0;
-//     int row = wallDataOffsets[wallNumber];
-//     int sp = (SCREENWIDTH*meta[wallNumber][POSY]) + meta[wallNumber][POSX];
-    
-//     for(i;i<=meta[wallNumber][HEIGHT]-1;++i)
-//     {
-//         memcpy(SCREENRAM_PTR+sp,&buffer[row],meta[wallNumber][WIDTH]);
-//         memcpy(COLOR_RAM+sp,&buffer[SCREENSIZE+row],meta[wallNumber][WIDTH]);
-//         sp += SCREENWIDTH;
-//         row += SCREENWIDTH;
-//     }
-// }
-
-// void canvasHorizonDraw()
-// {
-//     unsigned char i = 0;
-//     int row = wallDataOffsets[HO];
-//     int sp = (SCREENWIDTH*meta[HO][POSY]) + meta[HO][POSX];
-    
-//     for(i;i<=meta[HO][HEIGHT]-1;++i)
-//     {
-//         memcpy(SCREENRAM_PTR+sp,&ui[row],meta[HO][WIDTH]);
-//         memcpy(COLOR_RAM+sp,&ui[SCREENSIZE+row],meta[HO][WIDTH]);
-//         sp += SCREENWIDTH;
-//         row += SCREENWIDTH;
-//     }
-// }
 
 void canvaseWallToBuffer(const unsigned char wallNumber)
 {
@@ -125,7 +96,8 @@ void canvasDraw()
 void canvasLoad()
 {
     /* change this to match the tileset of map data later */
-    fileOpen("d000",2);
-    fileRead(&buffer);
+    fileOpen("d000lz",2);
+    fileRead(lzbuffer);
     fileClose(2);
+    decompress_lz4(lzbuffer+8, buffer, 2000);
 }

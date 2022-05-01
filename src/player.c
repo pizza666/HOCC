@@ -133,3 +133,10 @@ unsigned char playerMove()
     }
     return 0; // player hasn't moved
 }
+
+unsigned char playerAttack(){
+    if(keyin==' ')
+    {
+        return 1;
+    }
+}

@@ -20,5 +20,6 @@ void inputInit()
 /* handle all inputs */
 void input()
 {
-    keyin = cgetc();
+    if(kbhit)
+        keyin = cgetc();
 }
