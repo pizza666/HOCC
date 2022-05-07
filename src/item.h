@@ -11,10 +11,13 @@
 #define ITEM_AXE 0
 #define ITEM_MACE 1
 
+#define WEAPON_SPRITE_1 0
+
 typedef struct Weapon
 {
     unsigned char name[10];
-    unsigned char dmg;
+    unsigned char dmgMin;
+    unsigned char dmgMax;
     unsigned char skillId;
 } Weapon;
 

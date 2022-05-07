@@ -33,11 +33,9 @@ int main(void)
     SCREENRAM_PTR[8] = '.';
     spriteLoad();
     SCREENRAM_PTR[9] = '.';
-    gameInit();
-    SCREENRAM_PTR[10] = '.';
-    playerGetFov();
-    SCREENRAM_PTR[11] = '.';
     uiDraw();
+    gameInit();
+    playerGetFov();
     canvasDraw();
 
     while(1)
@@ -47,8 +45,6 @@ int main(void)
         #endif
 
         input();
-
-
 
         if(keyin == '+'){
 
@@ -86,7 +82,10 @@ int main(void)
         if(keyin=='r')
         {
             // draw weapon
-            spriteDraw(ITEM_AXE,0,SPRITE_WEAPON_X,SPRITE_WEAPON_Y);
+            if(VIC.spr_ena & sprBitmask[WEAPON_SPRITE_1])
+                spriteHide(WEAPON_SPRITE_1);
+            else
+                spriteDraw(ITEM_AXE,WEAPON_SPRITE_1,SPRITE_WEAPON_X,SPRITE_WEAPON_Y);
         }
 
         if(!encounter && playerMove())
@@ -112,7 +111,7 @@ int main(void)
                 d20 = diceRoll(D20);
                 if(d20>enemyCurrent.attr.ac)
                 {
-                    d6 = diceRoll(D6);
+                    d6 = diceRoll(p.character.inventory.weapon->dmgMax);
                     if(enemyCurrent.attr.hp>d6)
                         enemyCurrent.attr.hp -= d6;
                     else enemyCurrent.attr.hp=0;

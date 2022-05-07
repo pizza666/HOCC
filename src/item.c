@@ -9,6 +9,6 @@
 #include "item.h"
 
 Weapon weapons[2] = {
-    {"axe",2,0},
-    {"mace",2,0}
+    {"axe",1,6,0},
+    {"mace",1,6,0}
 };

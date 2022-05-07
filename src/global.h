@@ -44,5 +44,6 @@ extern unsigned char d6;
 extern unsigned char d20;
 extern unsigned char success;
 extern unsigned char encounter;
+extern unsigned char sprBitmask[8];
 
 #endif

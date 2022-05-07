@@ -61,11 +61,11 @@ void gameInit()
     p.character.attr.strDexInt[INT] = 11;
     p.character.inventory.weapon = &weapons[ITEM_AXE];
 
-    //spriteDraw(ITEM_AXE,0,SPRITE_WEAPON_X,SPRITE_WEAPON_Y);
-
     p.character.skills[0].attr = DEX;
     p.character.skills[0].sp = 0;
     p.character.skills[0].sl = 0;
+
+    spriteDraw(ITEM_AXE,WEAPON_SPRITE_1,SPRITE_WEAPON_X,SPRITE_WEAPON_Y);
 
     SID.amp = volume;
 }
@@ -77,7 +77,7 @@ void debug()
     gotoxy(2,17);   
     cprintf("x:%03d y:%03d d:%03d k:%c d6:%03d d20:%03d",p.x,p.y,p.d,keyin,d6,d20);
     gotoxy(2,18); 
-    cprintf("enemy hp:%03d",enemyCurrent.attr.hp);
+    cprintf("e: %s hp:%03d ac:%03d ",enemyCurrent.name,enemyCurrent.attr.hp,enemyCurrent.attr.ac);
 }
 #endif
 

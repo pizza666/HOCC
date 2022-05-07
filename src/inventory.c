@@ -14,5 +14,5 @@ void inventoryDraw(void* inventory)
     Inventory* inv = inventory;
 
     menuLeftClr();
-    cprintf("w: %s dmg: %d", inv->weapon->name, inv->weapon->dmg);
+    cprintf("w: %s dmg: %dd%d", inv->weapon->name, inv->weapon->dmgMin,inv->weapon->dmgMax);
 }
