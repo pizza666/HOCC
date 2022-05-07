@@ -14,7 +14,6 @@
 
 #define SID_WAVE_WHITENOISE 129
 
-
 /// sound effects
 #define SFX_WALK 0
 #define SFX_ATTACK 1

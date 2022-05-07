@@ -14,18 +14,10 @@
 #include <conio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
-/* enable debugging */
-#define DEBUG
+/* game specific consts */
 
-/* custom includes */
-// #include "global.h"
-//#include "input.h"
-//#include "player.h"
-// #include "file.h"
-//#include "canvas.h"
+#define SPAWN_RATE 4
 
 void uiDraw();
 void charsetLoad(const char *filename);

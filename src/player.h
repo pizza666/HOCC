@@ -8,6 +8,8 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
+#include "entity.h"
+
 #define PD_NORTH 0
 #define PD_EAST  64
 #define PD_SOUTH 128
@@ -25,12 +27,14 @@ typedef struct Player
     unsigned char y;
     unsigned char d;
     unsigned char ico;
+    Entity character;
 } Player; 
+
+
 unsigned char playerMove();
 unsigned char playerAttack();
 void playerReset();
 void playerGetFov();
-
 
 /* End of player.h */
 #endif

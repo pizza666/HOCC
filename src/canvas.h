@@ -24,7 +24,6 @@
 #define E2 5
 #define N2 6
 
-
 /* 1st row infront of the fov */
 #define W1 7
 #define E1 8
@@ -41,12 +40,8 @@
    
 void canvasLoad();
 void canvasDraw();
-// void canvasWallDraw(const unsigned char wallNumber);
 void canvaseWallToBuffer(const unsigned char wallNumber);
 void canvasTilesetLoad();
-// void canvasHorizonDraw();
-// void copyWall();
-
 
 /* End of canvas.h */
 #endif

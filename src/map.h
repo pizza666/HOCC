@@ -22,7 +22,6 @@
 #define EXITW 4
 #define MCHR 5
 
-
 typedef struct Map
 {
     unsigned char meta[20];

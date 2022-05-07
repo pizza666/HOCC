@@ -18,63 +18,54 @@ void playerReset()
 
 void playerGetFov()
 {
+    unsigned char i;
+    unsigned char j;
     switch(p.d)
     {
         case PD_NORTH:
             p.ico = PICO_NORTH;
-            fov[W3] = map.data[p.y-3][p.x-1];
-            fov[N3] = map.data[p.y-3][p.x];
-            fov[E3] = map.data[p.y-3][p.x+1];
-            fov[W2] = map.data[p.y-2][p.x-1];
-            fov[N2] = map.data[p.y-2][p.x];
-            fov[E2] = map.data[p.y-2][p.x+1];
-            fov[W1] = map.data[p.y-1][p.x-1];
-            fov[N1] = map.data[p.y-1][p.x];
-            fov[E1] = map.data[p.y-1][p.x+1];
-            fov[W0] = map.data[p.y][p.x-1];
-            fov[E0] = map.data[p.y][p.x+1];
+            j = 3;
+            for(i=1;i<12;i+=3)
+            {
+                fov[i] =  map.data[p.y-j][p.x-1];
+                fov[i+1] = map.data[p.y-j][p.x+1];
+                fov[i+2] = map.data[p.y-j][p.x];
+                j--;
+            }
         break;
         case PD_SOUTH:
             p.ico = PICO_SOUTH;
-            fov[W3] = map.data[p.y+3][p.x+1];
-            fov[N3] = map.data[p.y+3][p.x];
-            fov[E3] = map.data[p.y+3][p.x-1];
-            fov[W2] = map.data[p.y+2][p.x+1];
-            fov[N2] = map.data[p.y+2][p.x];
-            fov[E2] = map.data[p.y+2][p.x-1];
-            fov[W1] = map.data[p.y+1][p.x+1];
-            fov[N1] = map.data[p.y+1][p.x];
-            fov[E1] = map.data[p.y+1][p.x-1];
-            fov[W0] = map.data[p.y][p.x+1];
-            fov[E0] = map.data[p.y][p.x-1];
+            j = 3;
+            for(i=1;i<12;i+=3)
+            {
+                fov[i] =  map.data[p.y+j][p.x+1];
+                fov[i+1] = map.data[p.y+j][p.x-1];
+                fov[i+2] = map.data[p.y+j][p.x];
+                j--;
+            }
         break;
         case PD_EAST:
         	p.ico = PICO_EAST;
-            fov[W1] = map.data[p.y-1][p.x+1];
-            fov[W2] = map.data[p.y-1][p.x+2];
-            fov[W3] = map.data[p.y-1][p.x+3];
-            fov[E1] = map.data[p.y+1][p.x+1];
-            fov[E2] = map.data[p.y+1][p.x+2];
-            fov[E3] = map.data[p.y+1][p.x+3];
-            fov[N1] = map.data[p.y][p.x+1];
-            fov[N2] = map.data[p.y][p.x+2];
-            fov[N3] = map.data[p.y][p.x+3];
-            fov[W0] = map.data[p.y-1][p.x];
-            fov[E0] = map.data[p.y+1][p.x];
+            j = 3;
+            for(i=1;i<12;i+=3)
+            {
+                fov[i] =  map.data[p.y-1][p.x+j];
+                fov[i+1] = map.data[p.y+1][p.x+j];
+                fov[i+2] = map.data[p.y][p.x+j];
+                j--;
+            }
         break;
         case PD_WEST:
             p.ico = PICO_WEST;
-            fov[W1] = map.data[p.y+1][p.x-1];
-            fov[W2] = map.data[p.y+1][p.x-2];
-            fov[W3] = map.data[p.y+1][p.x-3];
-            fov[E1] = map.data[p.y-1][p.x-1];
-            fov[E2] = map.data[p.y-1][p.x-2];
-            fov[E3] = map.data[p.y-1][p.x-3];
-            fov[N1] = map.data[p.y][p.x-1];
-            fov[N2] = map.data[p.y][p.x-2];
-            fov[N3] = map.data[p.y][p.x-3];
-            fov[W0] = map.data[p.y+1][p.x];
-            fov[E0] = map.data[p.y-1][p.x];
+
+            j = 3;
+            for(i=1;i<12;i+=3)
+            {
+                fov[i] =  map.data[p.y+1][p.x-j];
+                fov[i+1] = map.data[p.y-1][p.x-j];
+                fov[i+2] = map.data[p.y][p.x-j];
+                j--;
+            }
         break;
     }
 }

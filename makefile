@@ -230,13 +230,13 @@ CSOURCES += $(wildcard $(SRCDIR)/$(TARGETLIST)/*.c)
 # Set SOURCES to something like 'src/foo.c src/bar.s'.
 # Use of assembler files with names ending differently than .s is deprecated!
 SOURCES := $(CSOURCES)
-#SOURCES += $(wildcard $(SRCDIR)/*.s)
+SOURCES += $(wildcard $(SRCDIR)/*.s)
 SOURCES += $(wildcard $(SRCDIR)/*.asm)
 SOURCES += $(wildcard $(SRCDIR)/*.a65)
 
 # Add to SOURCES something like 'src/c64/me.c src/c64/too.s'.
 # Use of assembler files with names ending differently than .s is deprecated!
-#SOURCES += $(wildcard $(SRCDIR)/$(TARGETLIST)/*.s)
+SOURCES += $(wildcard $(SRCDIR)/$(TARGETLIST)/*.s)
 SOURCES += $(wildcard $(SRCDIR)/$(TARGETLIST)/*.asm)
 SOURCES += $(wildcard $(SRCDIR)/$(TARGETLIST)/*.a65)
 

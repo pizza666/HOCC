@@ -10,7 +10,7 @@ unsigned char volume = 12;
 
 Sfx sfx[2] = {
     {2000,0,SID_WAVE_WHITENOISE,34,3},   // SFX_WALK
-    {8000,0,SID_WAVE_WHITENOISE,34,3}   //SSFX_ATTACK
+    {8000,0,SID_WAVE_WHITENOISE,34,3}    // SFX_ATTACK
 };
 
 void soundPlaySfx(const unsigned char sfxId){
@@ -22,7 +22,5 @@ void soundPlaySfx(const unsigned char sfxId){
 }
 
 void soundStop(){
-    //SID.v1.ad = 0;
-    //SID.v1.sr = 0;
     SID.v1.ctrl = 0;
 }

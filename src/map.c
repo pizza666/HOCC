@@ -16,7 +16,7 @@
 
 void mapLoad(unsigned char mid)
 {
-    unsigned char f[4];
+    unsigned char f[5];
     sprintf(f,"m%03d",mid);
     fileOpen(f,2);
     fileRead(&map);
@@ -57,4 +57,9 @@ void mapDraw()
         if(i==p.y) MAPPOS_PTR[row+p.x] = p.ico;
         row +=SCREENWIDTH;
     }
+
+    #ifdef DEBUG
+        gotoxy(2,19);   
+        cprintf("m %03d",map.meta[MID]);
+    #endif
 }
