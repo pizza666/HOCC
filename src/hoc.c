@@ -75,9 +75,9 @@ void debug()
 {
     textcolor(1);
     gotoxy(2,17);   
-    cprintf("x:%03d y:%03d d:%03d k:%c d6: %03d d20: %03d",p.x,p.y,p.d,keyin,d6,d20);
+    cprintf("x:%03d y:%03d d:%03d k:%c d6:%03d d20:%03d",p.x,p.y,p.d,keyin,d6,d20);
     gotoxy(2,18); 
-    cprintf("enemy hp: %03d",enemyCurrent.attr.hp);
+    cprintf("enemy hp:%03d",enemyCurrent.attr.hp);
 }
 #endif
 
