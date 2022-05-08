@@ -6,6 +6,7 @@
  * https://github.com/pizza666/HOCC by Jan-Dirk Lehde
  *******************************************************/
 
+#include <string.h>
 #include "global.h"
 #include "enemy.h"
 #include "sprite.h"
@@ -26,6 +27,7 @@ void enemySpawn(unsigned char enemyId)
 
 void enemyDespawn()
 {
+    memset(&enemyCurrent, 0, sizeof(Entity));
     spriteHide(ENEMY_SPRITE_1);
     encounter = 0;
 }
