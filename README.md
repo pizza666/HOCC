@@ -10,7 +10,7 @@ Original ASM project from https://github.com/pizza666/HOC/
 
 1. Get cc65 from https://cc65.github.io/
 
-2. Get MSYS2 https://www.msys2.org/\
+2. Get MSYS2 https://www.msys2.org/ \
     pacman -S mingw-w64-ucrt-x86_64-gcc\
     pacman -S make
 
