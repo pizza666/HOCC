@@ -6,14 +6,26 @@ Original ASM project from https://github.com/pizza666/HOC/
 
 ## Build instructions
 
-Needs cc65 V2.19 - https://cc65.github.io/ and VICE 3.6.1
+### On Windows
 
-1. Compile with:  
-make
+1. Get cc65 from https://cc65.github.io/
 
+2. Get MSYS2 https://www.msys2.org/\
+    pacman -S mingw-w64-ucrt-x86_64-gcc\
+    pacman -S make
 
-2. Start with:  
-make test
+3. Get vice https://vice-emu.sourceforge.io/
+
+4. Add to path environment variable:\
+    C:\msys64\usr\bin\
+    C:\msys64\ucrt64\bin\
+    C:\\{path to vice bin directory}
+
+5. Compile with: \
+    make
+
+6. Start with:\
+    make test
 
 ## Keybinds
 
