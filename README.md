@@ -19,7 +19,8 @@ Original ASM project from https://github.com/pizza666/HOC/
 4. Add to path environment variable:\
     C:\msys64\usr\bin\
     C:\msys64\ucrt64\bin\
-    C:\\{path to vice bin directory}
+    C:\\{path to cc65}\bin\
+    C:\\{path to VICE }\bin
 
 5. Compile with: \
     make
